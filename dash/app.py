@@ -93,7 +93,7 @@ layout_Horas_Ejecutadas_Propias_Proyecto = html.Div(
     className = "row",
     children = [
         html.Div(
-            className = "column",
+            className = "four column",
             children = [
                 html.H4(children = "TITULO2"),
                 dcc.Graph(
