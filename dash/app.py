@@ -8,15 +8,16 @@ import plotly.express as px
 import plotly 
 import plotly.graph_objs as go 
 
-
+#this function allows to use a different port
 def run_server(self,
-               port=8053,
-               debug=True,
-               threaded=True,
+               port = 8050,
+               debug = True,
+               threaded = True,
                **flask_run_options):
-    self.server.run(port=port, debug=debug, **flask_run_options)
-    
-def generate_table(dataframe, max_rows=10):
+    self.server.run(port = port, debug = debug, **flask_run_options)
+
+#print table
+def generate_table(dataframe, max_rows = 10):
     return html.Table([
         html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
@@ -28,6 +29,7 @@ def generate_table(dataframe, max_rows=10):
         ])
     ])
 
+#get projects from db
 def get_proy(proyectos):
     r = []
     for p in proyectos:
@@ -45,50 +47,56 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 
 # Init my app dash and define my style CSS
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)#, suppress_callback_exceptions=True)
 #change default port
+#Layouts
 
+layout_titulo = html.Div(
+    className='row',
+    children = 
+    [
+        html.H2(children = "TITULO"),   
+    ],style={'text-align': 'center'}
+)  
 
-app.layout = html.Div(
+layout_actividades_proyectos = html.Div(
+    className='row',
     children = [
         html.Div(
-            className='row',
+            className="four columns",
             children = [
-                html.H4(children = "TITULO"),
-                
-            ],style={'text-align': 'center'}
-        ),
+            html.Label('Proyectos'),
+            dcc.Dropdown(
+                id='proy_selector',
+                options = get_proy(original.Proyecto.sort_values().unique()),
+                multi=True, value = original.Proyecto.sort_values().unique()[12]
+            ),
+            
+        ]),
         html.Div(
-            className='row',
+            className="eight columns",
             children = [
-                html.Div(
-                    className="two columns",
-                    children = [
-                    html.Label('Dropdown'),
-                    dcc.Dropdown(
-                        id='proy_selector',
-                        options = get_proy(original.Proyecto.sort_values().unique()),
-                        value=original.Proyecto.sort_values().unique()[0],multi=True
-                    ),
-                    
-                ]),
-                html.Div(
-                    className="ten columns",
-                    children = [
-                    html.Label('grafica'),#generate_table(original)
-                    dcc.Graph(id='actividades_por_proyecto')                    
-                ])
-            ]
-        )
-    
+            #html.Label('grafica'),#generate_table(original)
+            dcc.Graph(id='actividades_por_proyecto')                    
+        ])
     ]
-
+)
+  
+#app layout  
+app.layout = html.Div(
+    children = [layout_titulo, layout_actividades_proyectos    
+    ]
 )
 
+
+#callbacks
 @app.callback(
     Output('actividades_por_proyecto', 'figure'),
     [Input('proy_selector', 'value')])
 def update_graph_scatter(proyectos):
+    print(proyectos)
+    if isinstance(proyectos, str):
+        proyectos = [proyectos]
     fig = go.Figure()
     for p in proyectos:
         aux = original[original['Proyecto'] == p]
@@ -121,7 +129,8 @@ def update_graph_scatter(proyectos):
                   title={'text': 'Actividad en los proyectos', 'font': {'color': 'white'}, 'x': 0.5}
     )
     """
+    fig.update_layout(title={'text': 'Actividad en los proyectos', 'font': {'color': 'black', 'size': 25}, 'x': 0.5})
     return fig#{'data': [data], 'layout' : go.Layout(xaxis=dict(range=[min(X),max(X)]),yaxis = dict(range = [min(Y),max(Y)]),)} 
   
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8052)
+    app.run_server(debug = True, port = 8057)
