@@ -1,0 +1,17 @@
+Pagina Principal
+Home_Skit_Consulting.py
+
+Configuracion de BD
+data.py
+
+Configuracion de Servidor Dash
+app.py
+
+Reportes
+/apps
+
+CSS y Java Scrips
+/assets
+
+Servidor
+http://18.222.47.62:8080
