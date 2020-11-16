@@ -51,7 +51,7 @@ layout = html.Div([
                         className='mb-10',
                     ),
                     html.Div([
-                        html.A('Start Here', className='btn btn-outline-secondary text-dark font-home-m', href="/Data_Exploration"),
+                        html.A('Start Here', className='btn btn-outline-secondary text-dark font-home-m', href="/Proyect_Information"),
                     ]),
                     ],
                     className='col-md-10 p-lg-5 mx-auto my-5',

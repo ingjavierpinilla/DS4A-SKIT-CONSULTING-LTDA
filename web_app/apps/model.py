@@ -309,6 +309,18 @@ layout = html.Div([
 							#className = 'mb-10 display-4 font-weight-bold text-home-title font-medium'
 							className = 'h1'
 						)	
+                    ),
+                    html.Div([
+                        html.P(
+							'In this section we will make a prediction of the number of hours it may take to develop a new project.', 
+							#className = 'mb-10 display-4 font-weight-bold text-home-title font-medium'
+							className = 'h6'
+						),
+						html.P(
+							'Note: The sum of Pre-sale, Development, Requirements and Support activities cannot exceed 100%.', 
+							#className = 'mb-10 display-4 font-weight-bold text-home-title font-medium'
+							className = 'h6'
+						)]
                     ), 
                     html.Div([
                             row1, row2, row3, row4, row5, 
@@ -368,7 +380,8 @@ def update_output_div(clicks, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10):
         #for x, y in variables.items():
         #    print(x, y)
         Y = scoring(variables, "xgboost_skit.pkl")
-        return 'Number of hours estimated for the development of the project: {}'.format(Y[0])
+        Y = Y[0]
+        return 'Number of hours estimated for the development of the project: {:3.2f} - {:3.2f}'.format(Y - 0.1 * Y, Y + 0.1 * Y)
     
 """    
 @app.callback(

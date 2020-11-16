@@ -74,10 +74,14 @@ layout_form = dbc.Row([
 
 
 layout =  html.Div([
-     title, 
-     layout_Importar_CSV,
-     layout_form,
-     layout_dash_Table
+    html.Br(),
+	dbc.Alert(["Enter the number of days of inactivity (no activity log) so that data exploration is on closed projects." ], 
+		color = "secondary", 
+	),
+	title, 
+    layout_Importar_CSV,
+    layout_form,
+    layout_dash_Table
 ])
 
 def parse_contents(contents, filename, date):

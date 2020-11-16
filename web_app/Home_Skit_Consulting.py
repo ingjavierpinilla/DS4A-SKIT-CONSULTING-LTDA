@@ -21,9 +21,9 @@ SKING_CONSULTING_LOGO = "/assets/img/skit-consulting-logo.png"
 navbar_children = dbc.Nav(
     [
         dbc.NavItem(dbc.NavLink("Home", active=True, href="/")),
-        dbc.NavItem(dbc.NavLink("Administration", href="/Administration", disabled=False)),
-        dbc.NavItem(dbc.NavLink("Data Exploration", href="/Data_Exploration")),
+        dbc.NavItem(dbc.NavLink("Administration", href="/Administration", disabled=False)),        
         dbc.NavItem(dbc.NavLink("Project Information", href="/Project_Information")),
+        dbc.NavItem(dbc.NavLink("Data Exploration", href="/Data_Exploration")),
         dbc.NavItem(dbc.NavLink("Model", href="/Model")),
         
         #, disabled=True
@@ -126,6 +126,6 @@ def display_page(pathname):
 
 #app run server ----------------------------------------------------------------------------------------------------   
 if __name__ == '__main__':
-    app.run_server(debug=True, host = '0.0.0.0', port = '8080')
+    app.run_server(debug=False, host = '0.0.0.0', port = '8080')
     #app.run_server(debug=True)
    
