@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine
 import pandas as pd
+from keys import pass, ip
 
-engine = create_engine("postgresql+psycopg2://postgres:7$col&ds0@ds4a-70-db.cgxzuy7k08ix.us-east-2.rds.amazonaws.com/")
+engine = create_engine("postgresql+psycopg2://postgres:" + pass + "@" + ip + "/")
 df_model = pd.read_sql_table('df_model',engine)
 original = pd.read_sql_table('skit_final',engine)
 SKIT_FINAL = pd.read_sql_table('skit_final',engine)
